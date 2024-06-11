@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href = "style.css">
+    <title>TBD</title> <!-- Update title -->
+</head>
+<body>
+    <script>
+        const APIKey = "73b9c4fac036463a971111450241006";
+        const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${APIKey}&q=hyderabad`;
+        
+        const token = "r2fwaVkLRMOpudamAboUcqaE5OiY8JZK";
+        const deviceUrl = `https://blr1.blynk.cloud/external/api/isHardwareConnected?token=${token}`;
+        const baseUrl = `https://blr1.blynk.cloud/external/api/get?token=${token}`;
+        const maxHeight = parseFloat(21);
+        
+        
+        async function fetchWeather() {
+            try {
+                const response = await fetch(apiUrl, {
+                    mode: 'cors',
+                });
+                const data = await response.json();
+                console.log(data);
+
+                document.getElementById('latitude-data').innerText = "Latitude : " + data.location.lat+"°";
+                document.getElementById('longitude-data').innerText = "Longitude : " + data.location.lon +"°";
+                document.getElementById('temp-data').innerText = "Temperature : " + data.current.temp_c +" °C";
+                document.getElementById('rain-data').innerText = "Precipitation : " + data.current.precip_mm+" mm";
+
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        }
+
+        async function fetchWaterDeviceInfo(){
+            try {
+                const response = await fetch(deviceUrl);
+                const data = await response.json();
+                console.log(data);
+                if(data==true){
+                    document.getElementById('device-status').innerHTML='On';
+                    document.getElementById('device-button').style.backgroundColor='green';
+                }
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        }
+
+        async function fetchWaterHeightInfo(){
+            try {
+                const response = await fetch(baseUrl + "&v1");
+                const data = await response.json();
+                console.log(data);
+                document.getElementById('water-height-data').innerText = "Water Height : "+ data+" cm";
+                const waterTankTop = document.querySelector('.water-tank-top');
+                let waterHeight = (parseFloat(data)/maxHeight)*100;
+                document.getElementById('water-level-data').innerText ="Water Level : " + waterHeight.toFixed(2)+'%';
+                if (waterTankTop) {
+                    waterTankTop.style.height = waterHeight+'%';
+                } else {
+                    console.error("Element with class 'water-tank-top' not found.");
+                }
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        }
+        async function fetchWaterFlowRateInfo(){
+            try {
+                const response = await fetch(baseUrl + "&v2");
+                const data = await response.json();
+                console.log(data);
+                document.getElementById('flow-rate-data').innerText = "Flow Rate : "+ data; // update Units
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        }
+        async function fetchPumpInfo(){
+            try {
+                const response = await fetch(baseUrl + "&v3");
+                const data = await response.json();
+                console.log(data);
+                if(data==true){
+                    document.getElementById('pump-status').innerHTML='On';
+                    document.getElementById('pump-button').style.backgroundColor='green';
+                }
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+        }
+
+        fetchWeather();
+        fetchWaterDeviceInfo();
+        fetchWaterHeightInfo();
+        fetchWaterFlowRateInfo();
+        fetchPumpInfo();
+    </script>
+
+    <div class="container">
+        <div class="device-container">
+            <div class="device-el">
+                <div class="device-bar">
+                    <div class="device-name">
+                        Device Status :<!--Write whatever name u want-->
+                    </div>
+                    <div class="device-status" id="device-status">
+                        Off
+                    </div>
+                    
+                </div>
+                <div class="device-bulb">
+                    <div class="device-button" id="device-button">
+
+                    </div>
+                </div>
+            </div>
+            <div class="device-el">
+                <div class="device-bar">
+                    <div class="device-name">
+                        Pump Status :
+                    </div>
+                    <div class="device-status" id="pump-status">
+                        Off
+                    </div>
+                </div>
+                <div class="device-bulb">
+                    <div class="device-button" id="pump-button">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class ="water-container">
+            <div class="water-container-head">
+                Water Level Indicator <!-- Update title -->
+            </div>
+            <div class="water-container-body">
+                <div class="water-tank-container">
+                    <div class="water-tank">
+                        <div class="water-tank-top">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="water-container-levels">
+                    <div class="levels-el" style="margin-top: 5%;">
+                        100%
+                    </div>
+                    <div class="levels-el">
+                        90%
+                    </div>
+                    <div class="levels-el">
+                        80%
+                    </div>
+                    <div class="levels-el">
+                        70%
+                    </div>
+                    <div class="levels-el">
+                        60%
+                    </div>
+                    <div class="levels-el">
+                        50%
+                    </div>
+                    <div class="levels-el">
+                        40%
+                    </div>
+                    <div class="levels-el">
+                        30%
+                    </div>
+                    <div class="levels-el">
+                        20%
+                    </div>
+                    <div class="levels-el">
+                        10%
+                    </div>
+                </div>
+            </div>
+            <!-- water level, flow rate, temperature, lat, long, rain forecast -->
+        </div>
+        <div class="details-container">
+            <div class="details-el" id="latitude-data" style="margin-top: 2vh;">
+                Latitude
+            </div>
+            <div class="details-el" id="longitude-data">
+                Longitude
+            </div>
+            <div class="details-el" id = "temp-data">
+                Temperature
+            </div>
+            <div class="details-el" id="rain-data">
+                Rainfall (in cm)
+            </div>
+            <div class="details-el" id="water-height-data">
+                Water height
+            </div>
+            <div class="details-el" id="water-level-data">
+                Water Level
+            </div>
+            <div class="details-el" id="flow-rate-data">
+                Flow Rate 
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

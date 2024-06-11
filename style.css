@@ -1,0 +1,168 @@
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    background: linear-gradient(135deg, #00feba, #5b548a);
+    color: #fff;
+
+}
+
+.device-container{
+    width:20%;
+    height: 60%;
+    margin-top: 20vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.device-el{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5vh;
+    background: linear-gradient(135deg, #020202, #a1a9a9);
+    color: #fff;
+    margin-left: 5vw;
+    border-radius: 6vh;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.device-bar{
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.device-name{
+    height: 50%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    font-size: 1.7vw;
+    font-weight: 700;
+}
+
+.device-status{
+    height: 50%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    font-size: 2vw;
+    font-weight: 700;
+}
+
+.device-bulb{
+    height: 100%;
+    width: 30%;
+    display: grid;
+    place-items: center;
+}
+
+.device-button{
+    height: 5vh;
+    width: 5vh;
+    border-radius: 50%;
+    border: 0.3vh solid black;
+    background-color: red;
+}
+
+
+
+.water-container{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.water-container-head{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4vw;
+    font-family: sans-serif;
+    font-weight: 600;
+}
+
+.water-container-body{
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    padding-left: 10%;
+}
+
+.water-tank-container{
+    margin-top: 1%;
+    height: 90%;
+    width: 70%;
+    display: grid;
+    place-items: center;
+    transform: translate(6vw, 0px);
+}
+
+.water-tank{
+    width: 60%;
+    height: 100%;
+    border-radius: 100%/ 4vh;
+    background: 
+    radial-gradient(50% 2vh at 50% 2vh, #0003 99.99%, #0000 0),
+    radial-gradient(50% 2vh at 50% calc(100% - 2vh), #fff3 99.99%, #0000 0),
+    white;
+    border-bottom: 0.5vh solid black;
+    position: relative;
+}
+    
+    
+.water-tank-top{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    border-radius: 100%/ 3.2vh;
+    background: 
+    radial-gradient(50% 2vh at 50% 2vh, #0003 99.99%, #0000 0),
+    radial-gradient(50% 2vh at 50% calc(100% - 2vh), #fff3 99.99%, #0000 0),
+    blue;
+    border-bottom: 0.5vh solid black;
+}
+
+.water-container-levels{
+    height: 90%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+}
+
+.levels-el{
+    width: 100%;
+    height: 11%;
+}
+
+.details-container{
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transform: translate(-4vw, 0px);
+}
+
+.details-el{
+    height: 15%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+    font-size: 1.7vw;
+}
