@@ -59,6 +59,7 @@
                 let waterHeight = (parseFloat(data)/maxHeight)*100;
                 document.getElementById('water-level-data').innerText ="Water Level : " + waterHeight.toFixed(2)+'%';
                 if (waterTankTop) {
+                    waterTankTop.innerHTML='';
                     waterTankTop.style.height = waterHeight+'%';
                     if(data>=13){
                         waterTankTop.style.background = "radial-gradient(50% 2vh at 50% 2vh, #0003 99.99%, #0000 0)," + "radial-gradient(50% 2vh at 50% calc(100% - 2vh), #fff3 99.99%, #0000 0),red";
@@ -103,11 +104,17 @@
             }
         }
 
-        fetchWeather();
-        fetchWaterDeviceInfo();
-        fetchWaterHeightInfo();
-        fetchWaterFlowRateInfo();
-        fetchPumpInfo();
+        function repeatFunction(){
+            fetchWeather();
+            fetchWaterDeviceInfo();
+            fetchWaterHeightInfo();
+            fetchWaterFlowRateInfo();
+            fetchPumpInfo();
+            setTimeout(yourFunction, 5000);
+        }
+
+        repeatFunction();
+        
     </script>
 
     <div class="container">
